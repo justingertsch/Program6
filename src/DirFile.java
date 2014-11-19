@@ -16,7 +16,7 @@ public class DirFile extends DirectoryComponent
     {
         String tab = "\t";
         tab  = new String(new char[num]).replace("\0", tab);
-        System.out.println(this.name + tab);
+        System.out.println(tab + this.name);
     }
 
     public int count(boolean top)

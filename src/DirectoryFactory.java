@@ -28,30 +28,39 @@ public class DirectoryFactory
 
             String name = in.nextLine();
             int level = countLevel(name);
-            name.replaceAll("\\s+","");
+            name = name.trim();
             if(name.contains(":"))
             {
-                Directory dir = new Directory(name, passedParent);
-                passedParent.add(dir);
+                Directory dir = null;
+
                 if(level < passedLevel)
                 {
+
+                    dir = new Directory(name, passedParent.up());
+                    passedParent.up().add(dir);
                     process(in, level, passedParent.up());
                 }
                 else
                 {
+                    dir = new Directory(name, passedParent);
+                    passedParent.add(dir);
                     process(in, level, dir);
                 }
             }
             else
             {
-                DirFile dirFile = new DirFile(name, passedParent);
-                passedParent.add(dirFile);
+                DirFile dirFile = null;
+
                 if(level< passedLevel)
                 {
+                    dirFile = new DirFile(name, passedParent.up());
+                    passedParent.up().add(dirFile);
                     process(in, level, passedParent.up());
                 }
                 else
                 {
+                    dirFile = new DirFile(name, passedParent);
+                    passedParent.add(dirFile);
                     process(in, level, passedParent);
                 }
             }

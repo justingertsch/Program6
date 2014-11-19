@@ -21,8 +21,6 @@ public class TestDriver
             System.exit(1);
         }
 
-        //DirectoryComponent dir = DirectoryFactory.createDirTree(in);
-        //dir.listall(0);
         Explorer exp = new Explorer(DirectoryFactory.createDirTree(in));
         exp.start();
 

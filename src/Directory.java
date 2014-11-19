@@ -43,7 +43,7 @@ public class Directory extends DirectoryComponent
     {
         String tab = "\t";
         tab  = new String(new char[num]).replace("\0", tab);
-        System.out.println(this.name + tab);
+        System.out.println(tab + this.name);
         Iterator<DirectoryComponent> iterator = directoryComponents.iterator();
         while(iterator.hasNext())
         {
@@ -54,7 +54,7 @@ public class Directory extends DirectoryComponent
 
     public DirectoryComponent chdir(String directory)
     {
-        int index = dirExists(directory);
+        int index = dirExists(directory.trim());
         if( index >= 0)
         {
             return this.directoryComponents.get(index);
@@ -100,18 +100,17 @@ public class Directory extends DirectoryComponent
             count += directoryComponent.countall(false);
         }
 
-        if(!top)
-            return 0;
         return count;
 
     }
 
     private int dirExists(String directory)
     {
+        directory = directory+":";
         for (int i = 0; i < this.directoryComponents.size(); i++)
         {
             DirectoryComponent dir = this.directoryComponents.get(i);
-            if (directory.equals(dir.getName()+":"))
+            if (directory.equals(dir.getName()))
             {
                 return i;
             }
@@ -127,6 +126,9 @@ public class Directory extends DirectoryComponent
     @Override
     public String toString()
     {
-        return "Name: "+this.name+"  Parent: "+this.parent.toString();
+        if(this.parent == null)
+            return "Name: "+this.name+"  Parent: null";
+        else
+            return "Name: "+this.name+"  Parent: "+this.parent.toString();
     }
 }

@@ -55,12 +55,13 @@ public class Explorer
                     invalid();
                     break;
                 }
-
-                this.currentDirectory.chdir(cmds[1]);
+                DirectoryComponent temp = this.currentDirectory.chdir(cmds[1]);
+                if(temp != null)
+                    this.currentDirectory = temp;
                 break;
 
             case "up":
-                this.currentDirectory.up();
+                this.currentDirectory = this.currentDirectory.up();
                 break;
 
             case "count":
@@ -69,6 +70,9 @@ public class Explorer
 
             case "countall":
                 System.out.println(this.currentDirectory.countall(true));
+                break;
+
+            case "q":
                 break;
 
             default:
